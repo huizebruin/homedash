@@ -1,86 +1,63 @@
-# homedash
+# 🏠 home//dash
 
-# home//dash v7.1
+**Browser startpagina voor je homelab** — één scherm met alles wat je nodig hebt.
 
-Browser startpagina voor je homelab — draait in Docker.
+> Gemaakt door [huizebruin](https://github.com/huizebruin) met AI-assistentie (Claude door Anthropic)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](docker-compose.yml)
+
+## Wat zie je?
+
+- **Systeem stats** — CPU, geheugen, uptime, load, netwerk, schijven
+- **Docker containers** — status en klikbare poorten
+- **Diensten & IP-adressen** — eigen kaartjes met ping-check
+- **Weer** — 5-daags via Open-Meteo (gratis, geen key)
+- **Kalender + Agenda** — events, herhaling, Google Calendar koppelen
+- **Zoekbalk** — kies zoekmachine, zoekgeschiedenis
 
 ## Installatie
 
 ```bash
-# Uitpakken
-unzip homedash-v71.zip && cd homedash
-
-# Eerste keer bouwen en starten
+git clone https://github.com/huizebruin/homedash.git
+cd homedash
 docker compose up -d --build
-
-# Open in browser
-http://server-ip:1000
+# open: http://server-ip:1000
 ```
 
-## Update uitrollen (config blijft bewaard)
+## Update (data blijft bewaard)
 
 ```bash
 docker compose up -d --build
 ```
 
-De config staat in `./data/config.json` — zichtbaar naast dit bestand.
-Die map wordt **niet** overschreven bij een update.
+Config staat in `./data/config.json` — nooit overschreven bij updates.
 
-## Bestandsstructuur
+## Andere PC's in netwerk
 
-```
-homedash/
-├── data/
-│   └── config.json        ← al je instellingen, agenda, diensten
-├── frontend/
-│   ├── index.html
-│   ├── logo.png
-│   └── ...
-├── api/
-│   └── server.js
-└── docker-compose.yml
-```
+Stel in ⚙ Algemeen → API URL: `http://nas-ip:3001`
+Dan laadt elke browser dezelfde config van de server.
 
-## Configuratie op andere PC's
+## Google Calendar koppelen
 
-Open je browser en ga naar:
-`http://server-ip:1000`
+1. calendar.google.com → ⚙ → kalender kiezen
+2. Scroll naar "Publiek adres in iCal-formaat"
+3. Kopieer URL → ⚙ Kalenders in home//dash
 
-Alle instellingen worden automatisch van de server geladen.
+## Debug
 
-## Debuggen
-
-### Config controleren
 ```bash
 cat ./data/config.json
-```
-
-### API testen
-```bash
-# Health check (toont of config bestaat)
-curl http://server-ip:3001/health
-
-# Config ophalen
-curl http://server-ip:3001/api/config
-
-# Config opslaan (test)
-curl -X POST http://server-ip:3001/api/config \
-  -H "Content-Type: application/json" \
-  -d '{"test": true}'
-```
-
-### Container logs
-```bash
+curl http://localhost:3001/health
 docker logs homedash-api --tail 50
-docker logs homedash-frontend --tail 20
 ```
 
-### Config backup/restore
-```bash
-# Backup
-cp ./data/config.json ./data/config-backup-$(date +%Y%m%d).json
+## Credits
 
-# Restore
-cp ./data/config-backup-20260101.json ./data/config.json
-docker compose restart homedash-api
-```
+- Gemaakt door **Wobbe Bruin** ([huizebruin](https://github.com/huizebruin))
+- Met AI-assistentie van **Claude** (Anthropic)
+- Weer: [Open-Meteo](https://open-meteo.com/)
+
+## Licentie
+
+[MIT License](LICENSE)

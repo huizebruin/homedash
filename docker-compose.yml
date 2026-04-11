@@ -1,0 +1,46 @@
+version: "3.9"
+
+# ============================================================
+#  HomeDash — homelab dashboard stack
+#  Eerste keer:  docker compose up -d --build
+#  Update:       docker compose up -d --build   (data blijft!)
+#  Open:         http://server-ip:1000
+# ============================================================
+
+services:
+
+  homedash-frontend:
+    build: ./frontend
+    container_name: homedash-frontend
+    restart: unless-stopped
+    ports:
+      - "1000:80"
+    depends_on:
+      - homedash-api
+    networks:
+      - homedash
+
+  homedash-api:
+    build: ./api
+    container_name: homedash-api
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc:/host/proc:ro
+      # Config opslag: zichtbare map naast dit bestand
+      # config.json staat hier: ./data/config.json
+      - ./data:/data
+    environment:
+      - NODE_ENV=production
+      - DATA_DIR=/data
+    networks:
+      - homedash
+
+networks:
+  homedash:
+    name: homedash
+    driver: bridge
+
+# Geen named volume meer — ./data map is zichtbaar in je project folder
