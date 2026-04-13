@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <!-- Achtergrond transparant — werkt op donker én licht -->
+
+  <!-- Puls lijn (D-stijl) -->
+  <polyline
+    points="4,30 14,30 20,10 30,50 38,14 46,30 58,30"
+    fill="none"
+    stroke="#00e5a0"
+    stroke-width="3.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+
+  <!-- home//dash tekst -->
+  <text
+    x="72" y="37"
+    font-family="JetBrains Mono, Courier New, monospace"
+    font-size="22"
+    font-weight="700"
+    letter-spacing="-0.5"
+  >
+    <tspan fill="#dce6f8">home</tspan><tspan fill="#00e5a0">//</tspan><tspan fill="#dce6f8">dash</tspan>
+  </text>
+</svg>
