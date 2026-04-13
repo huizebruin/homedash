@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="home//dash — homelab browser startpagina door huizebruin">
 <title>home//dash</title>
-<link rel="icon" href="/logo.png" type="image/png">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -64,8 +64,8 @@ header {
   background:var(--bg2); border-bottom:1px solid var(--b1); z-index:100;
 }
 .logo-wrap a { display:flex; align-items:center; text-decoration:none; }
-.logo-wrap img { height:34px; width:auto; object-fit:contain; }
-.logo-txt { font-family:var(--mono); font-size:15px; font-weight:700; color:var(--acc); letter-spacing:-1px; display:none; }
+.logo-svg-pulse { transition:stroke .3s; }
+.logo-svg-slash { transition:fill .3s; }
 
 /* centered search */
 .srch-col { display:flex; justify-content:center; align-items:center; }
@@ -156,6 +156,56 @@ header {
 .dkc-bar { height:3px; background:var(--b1); border-radius:2px; overflow:hidden; }
 .dkc-fill { height:100%; border-radius:2px; transition:width .9s ease; }
 
+
+/* ════ COMPACT SYSTEEM PANEL ════ */
+.sys-scroll { flex:1; overflow-y:auto; min-height:0; }
+.sys-scroll::-webkit-scrollbar { width:3px; }
+.sys-scroll::-webkit-scrollbar-thumb { background:var(--b2); }
+
+/* CPU/MEM meter bars */
+.sys-meters { padding:8px 10px 6px; }
+.sm-row { display:flex; align-items:center; gap:7px; margin-bottom:5px; }
+.sm-lbl { font-family:var(--mono); font-size:8px; letter-spacing:1px; text-transform:uppercase; color:var(--t3); font-weight:600; min-width:26px; }
+.sm-track { flex:1; height:5px; background:var(--b1); border-radius:3px; overflow:hidden; }
+.sm-fill { height:100%; border-radius:3px; transition:width .9s ease; }
+.sm-val { font-family:var(--mono); font-size:13px; font-weight:700; min-width:36px; text-align:right; }
+.sm-sub { font-family:var(--mono); font-size:9px; color:var(--t3); padding:0 0 0 33px; margin-top:-2px; margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+/* Info rijen */
+.sys-info { padding:0 10px 6px; display:flex; flex-direction:column; gap:3px; }
+.si-row { display:flex; align-items:center; justify-content:space-between; padding:4px 8px; background:var(--s2); border:1px solid var(--b1); border-radius:5px; }
+.si-lbl { font-family:var(--mono); font-size:8px; color:var(--t3); text-transform:uppercase; letter-spacing:.8px; font-weight:600; }
+.si-val { font-family:var(--mono); font-size:10px; font-weight:600; color:var(--t1); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:120px; }
+
+/* Load avg sectie */
+.sys-load { padding:0 10px 7px; }
+.sys-load-hdr { font-family:var(--mono); font-size:8px; letter-spacing:1px; text-transform:uppercase; color:var(--t3); font-weight:600; margin-bottom:3px; }
+.sys-load-vals { font-family:var(--mono); font-size:11px; color:var(--t2); font-weight:600; }
+.load-bars { display:flex; align-items:flex-end; gap:3px; }
+.load-b { flex:1; border-radius:2px 2px 0 0; min-height:2px; transition:height .6s ease; }
+.load-lbl-row { display:flex; justify-content:space-between; font-family:var(--mono); font-size:8px; color:var(--t3); margin-top:2px; }
+
+/* Netwerk compact */
+.sys-net { padding:0 10px 7px; }
+.sys-sec-hdr { font-family:var(--mono); font-size:8px; letter-spacing:1px; text-transform:uppercase; color:var(--t3); font-weight:600; margin-bottom:4px; }
+.net-compact { background:var(--s2); border:1px solid var(--b1); border-radius:6px; overflow:hidden; }
+.nc-line { display:flex; align-items:center; gap:6px; padding:4px 9px; border-bottom:1px solid var(--b1); }
+.nc-line:last-child { border-bottom:none; }
+.nc-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.nc-key { font-family:var(--mono); font-size:9px; color:var(--t3); min-width:36px; }
+.nc-v { font-family:var(--mono); font-size:10px; color:var(--t1); font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; text-align:right; }
+
+/* Schijven */
+.disk-sec { padding:0 10px 8px; display:flex; flex-direction:column; gap:4px; }
+.disk-sec-hdr { font-family:var(--mono); font-size:8px; letter-spacing:1px; text-transform:uppercase; color:var(--t3); font-weight:600; margin-bottom:2px; }
+.dkc { background:var(--s2); border:1px solid var(--b1); border-radius:6px; padding:6px 9px; }
+.dkc-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2px; }
+.dkc-name { font-family:var(--mono); font-size:10px; font-weight:700; color:var(--t1); }
+.dkc-pct { font-family:var(--mono); font-size:12px; font-weight:700; }
+.dkc-info { font-family:var(--mono); font-size:9px; color:var(--t2); margin-bottom:3px; }
+.dkc-bar { height:3px; background:var(--b1); border-radius:2px; overflow:hidden; }
+.dkc-fill { height:100%; border-radius:2px; transition:width .9s ease; }
+
 /* ════════════════════════════════════════════════
    CENTER
 ════════════════════════════════════════════════ */
@@ -167,6 +217,12 @@ header {
 .cc.run::before { background:var(--acc); box-shadow:0 0 6px var(--acc-g); }
 .cc.stp::before { background:var(--red); }
 .cc:hover { border-color:var(--b3); }
+.cc-actions { display:none; position:absolute; top:6px; right:6px; gap:3px; }
+.cc:hover .cc-actions { display:flex; }
+.cc-btn { background:var(--bg2); border:1px solid var(--b2); color:var(--t3); border-radius:4px; padding:2px 5px; font-size:10px; cursor:pointer; font-family:var(--mono); transition:all .15s; line-height:1.4; }
+.cc-btn:hover { border-color:var(--acc); color:var(--acc); }
+.cc-btn.stop:hover { border-color:var(--red); color:var(--red); }
+.cc-btn.start:hover { border-color:var(--acc); color:var(--acc); }
 .cc-hd { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:4px; gap:5px; }
 .cc-nm { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--t1); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
 .cc-img { font-family:var(--mono); font-size:9px; color:var(--t2); margin-bottom:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -344,10 +400,11 @@ header {
 /* Mobiel */
 @media (max-width:700px) {
   html,body { overflow:auto; font-size:14px; }
+  .sys-scroll { overflow:visible; }
   .app { height:auto; grid-template-rows:auto auto; overflow:visible; }
   header { grid-template-columns:auto 1fr auto; grid-template-rows:auto auto; height:auto; padding:8px 12px 6px; gap:6px; }
   .logo-wrap { grid-column:1; grid-row:1; }
-  .logo-wrap img { height:28px; }
+  #logoSvg { width:110px; height:26px; }
   .hdr-r { grid-column:3; grid-row:1; gap:5px; }
   .hdr-r > span:not(:last-child):not(:nth-last-child(2)) { display:none; }
   #clock { font-size:12px; }
@@ -381,6 +438,60 @@ header {
   .svc-grid { grid-template-columns:1fr 1fr; }
   .net-row { grid-template-columns:1fr; }
 }
+
+/* Location search results */
+.loc-res-item {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 12px; cursor:pointer; font-size:12px;
+  border-bottom:1px solid var(--b1); transition:background .1s;
+}
+.loc-res-item:last-child { border-bottom:none; }
+.loc-res-item:hover { background:var(--s2); }
+.loc-res-name { color:var(--t1); font-weight:600; }
+.loc-res-sub { color:var(--t3); font-family:var(--mono); font-size:10px; }
+.loc-res-coords { color:var(--acc); font-family:var(--mono); font-size:10px; margin-left:auto; flex-shrink:0; }
+
+/* ════ NOTITIES WIDGET ════ */
+.notes-area {
+  width:100%; min-height:80px; background:var(--s2);
+  border:1px solid var(--b1); border-radius:var(--r);
+  color:var(--t1); font-family:var(--sans); font-size:12px;
+  padding:9px 11px; outline:none; resize:vertical;
+  transition:border-color .15s; line-height:1.5;
+}
+.notes-area:focus { border-color:var(--acc); }
+.notes-area::placeholder { color:var(--t3); }
+.note-saved { font-family:var(--mono); font-size:9px; color:var(--t3); margin-top:4px; }
+
+/* ════ SNELTOETSEN HINT ════ */
+.kbd { display:inline-block; background:var(--s2); border:1px solid var(--b2); border-radius:4px; padding:1px 6px; font-family:var(--mono); font-size:10px; color:var(--t2); }
+
+/* ════ STATUS CHIP ════ */
+.status-chip { display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:9px; padding:2px 7px; border-radius:10px; }
+.status-chip.ok  { background:var(--acc-a); color:var(--acc); border:1px solid rgba(0,229,160,.2); }
+.status-chip.err { background:var(--red-a); color:var(--red); border:1px solid rgba(255,80,112,.2); }
+.status-chip.warn{ background:var(--orn-a); color:var(--orn); border:1px solid rgba(255,179,71,.2); }
+
+/* ════ BOOKMARKS ════ */
+.bm-grid { display:flex; flex-wrap:wrap; gap:5px; padding:8px; }
+.bm-item { display:inline-flex; align-items:center; gap:6px; padding:5px 10px; background:var(--s2); border:1px solid var(--b1); border-radius:20px; text-decoration:none; font-size:12px; color:var(--t2); transition:all .2s; white-space:nowrap; }
+.bm-item:hover { border-color:var(--acc); color:var(--t1); background:var(--s3); }
+.bm-item .bm-ico { font-size:13px; }
+
+.bm-row { display:grid; grid-template-columns:32px 1fr 1fr 28px; gap:5px; margin-bottom:5px; align-items:center; }
+.bm-row input { background:var(--bg2); border:1px solid var(--b1); border-radius:5px; color:var(--t1); font-family:var(--mono); font-size:11px; padding:5px 7px; outline:none; width:100%; transition:border-color .15s; }
+.bm-row input:focus { border-color:var(--acc); }
+
+/* ════ UPTIME KUMA ════ */
+.kuma-chip { display:inline-flex; align-items:center; gap:5px; padding:4px 9px; background:var(--s2); border:1px solid var(--b1); border-radius:6px; font-family:var(--mono); font-size:10px; color:var(--t2); white-space:nowrap; }
+.kuma-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.kuma-dot.up { background:var(--acc); box-shadow:0 0 5px var(--acc-g); }
+.kuma-dot.down { background:var(--red); }
+.kuma-dot.pending { background:var(--orn); animation:blink 1s infinite; }
+/* ════ TEMP ════ */
+.temp-row { display:flex; align-items:center; justify-content:space-between; padding:4px 8px; background:var(--s2); border:1px solid var(--b1); border-radius:5px; }
+.temp-lbl { font-family:var(--mono); font-size:9px; color:var(--t3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:110px; }
+.temp-val { font-family:var(--mono); font-size:12px; font-weight:700; }
 </style>
 </head>
 <body>
@@ -389,9 +500,18 @@ header {
 <!-- HEADER -->
 <header>
   <div class="logo-wrap">
-    <a href="/" title="home//dash by huizebruin">
-      <img src="/logo.png" alt="home//dash" onerror="this.style.display='none';document.querySelector('.logo-txt').style.display='block'">
-      <span class="logo-txt">home//dash</span>
+    <a href="/" title="home//dash by huizebruin" style="display:flex;align-items:center;gap:6px;text-decoration:none">
+      <!-- Inline SVG logo: puls D + slash tekst G — werkt in donker én licht thema -->
+      <svg id="logoSvg" width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="home//dash">
+        <!-- Puls lijn (D) -->
+        <polyline id="logoPulse" points="2,16 9,16 12,6 17,26 22,9 27,16 34,16"
+          stroke="#00e5a0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+        <!-- Tekst: // groot + home//dash -->
+        <text x="42" y="21" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700"
+          id="logoText">
+          <tspan id="logoHome" fill="#dce6f8">home</tspan><tspan id="logoSlash" fill="#00e5a0">//</tspan><tspan id="logoDash" fill="#dce6f8">dash</tspan>
+        </text>
+      </svg>
     </a>
   </div>
 
@@ -421,6 +541,7 @@ header {
     <span class="ld"></span>
     <span><span class="hv" id="hCpu">–</span>&thinsp;cpu</span>
     <span><span class="hv" id="hMem">–</span>&thinsp;mem</span>
+    <span><span class="hv" id="hCtrs" style="color:var(--acc)">–</span>&thinsp;ctrs</span>
     <span id="clock">–</span>
     <button class="hb" onclick="openS()">⚙</button>
   </div>
@@ -431,49 +552,79 @@ header {
 
   <!-- LEFT: Systeem -->
   <div class="lc">
-    <div class="panel">
+    <div class="panel" style="flex:1;min-height:0;display:flex;flex-direction:column">
       <div class="ph">
         <div class="pt"><span class="pd" style="background:var(--acc);box-shadow:0 0 6px var(--acc)"></span>Systeem</div>
         <button class="pb" onclick="loadSys()">↻</button>
       </div>
-      <div class="sys-hero">
-        <div class="hero">
-          <div class="hero-lbl">CPU gebruik</div>
-          <div class="hero-val c-acc" id="cpuV">–</div>
-          <div class="hero-sub" id="cpuS">–</div>
-          <div class="hero-bar"><div class="hbar bg-acc" id="cpuB" style="width:0"></div></div>
+      <div class="sys-scroll">
+
+        <!-- CPU + MEM als 4-delige balk, smal maar informatief -->
+        <div class="sys-meters">
+          <div class="sm-row">
+            <span class="sm-lbl">CPU</span>
+            <div class="sm-track"><div class="sm-fill bg-acc" id="cpuB" style="width:0"></div></div>
+            <span class="sm-val c-acc" id="cpuV">–</span>
+          </div>
+          <div class="sm-row">
+            <span class="sm-lbl">MEM</span>
+            <div class="sm-track"><div class="sm-fill bg-blu" id="memB" style="width:0"></div></div>
+            <span class="sm-val c-blu" id="memV">–</span>
+          </div>
+          <div class="sm-sub" id="cpuS">–</div>
+          <div class="sm-sub" id="memS">–</div>
         </div>
-        <div class="hero">
-          <div class="hero-lbl">Geheugen</div>
-          <div class="hero-val c-blu" id="memV">–</div>
-          <div class="hero-sub" id="memS">–</div>
-          <div class="hero-bar"><div class="hbar bg-blu" id="memB" style="width:0"></div></div>
+
+        <!-- Info rijen -->
+        <div class="sys-info">
+          <div class="si-row"><span class="si-lbl">Server</span><span class="si-val c-acc" id="hostV">–</span></div>
+          <div class="si-row"><span class="si-lbl">Uptime</span><span class="si-val c-pur" id="uptV">–</span></div>
+          <div class="si-row"><span class="si-lbl">Platform</span><span class="si-val" id="platV">–</span></div>
+          <div class="si-row"><span class="si-lbl">Cores</span><span class="si-val" id="coreV">–</span></div>
         </div>
-      </div>
-      <div class="sys-info">
-        <div class="si-row"><span class="si-lbl">Server</span><span class="si-val c-acc" id="hostV" style="font-size:10px">–</span></div>
-        <div class="si-row"><span class="si-lbl">Uptime</span><span class="si-val c-pur" id="uptV" style="font-size:10px">–</span></div>
-        <div class="si-row"><span class="si-lbl">Load avg</span><span class="si-val" id="loadV" style="font-size:10px">–</span></div>
-        <div class="si-row"><span class="si-lbl">Platform</span><span class="si-val" id="platV" style="font-size:10px">–</span></div>
-        <div class="si-row"><span class="si-lbl">CPU cores</span><span class="si-val" id="coreV" style="font-size:10px">–</span></div>
-      </div>
-      <div class="load-vis">
-        <div style="font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);font-weight:600;padding:0 0 3px">Load gemiddelde</div>
-        <div class="load-bars" id="loadBars">
-          <div class="load-b bg-acc" style="height:40%"></div>
-          <div class="load-b bg-blu" style="height:40%"></div>
-          <div class="load-b bg-orn" style="height:40%"></div>
+
+        <!-- Load avg — compacte inline weergave -->
+        <div class="sys-load">
+          <div class="sys-load-hdr">Load avg</div>
+          <div class="sys-load-vals" id="loadV">– · – · –</div>
+          <div class="load-bars" id="loadBars" style="height:22px;margin:4px 0 2px">
+            <div class="load-b bg-acc" style="height:40%"></div>
+            <div class="load-b bg-blu" style="height:40%"></div>
+            <div class="load-b bg-orn" style="height:40%"></div>
+          </div>
+          <div class="load-lbl-row"><span>1 min</span><span>5 min</span><span>15 min</span></div>
         </div>
-        <div class="load-lbl-row"><span>1&thinsp;min</span><span>5&thinsp;min</span><span>15&thinsp;min</span></div>
-      </div>
-      <div class="net-row" id="netRow">
-        <div class="net-card"><div class="net-name"><span class="net-nm" style="background:var(--acc)"></span>Interface</div><div class="net-stat"><span class="net-v" id="netIp">–</span></div></div>
-        <div class="net-card"><div class="net-name"><span class="net-nm" style="background:var(--cyn)"></span>Extern IP</div><div class="net-stat"><span class="net-v" id="extIp">…</span></div></div>
-      </div>
-      <div class="disk-sec">
-        <div class="disk-sec-hdr">Schijven</div>
-        <div id="diskCpt"><div style="font-family:var(--mono);font-size:10px;color:var(--t3)">laden…</div></div>
-      </div>
+
+        <!-- Netwerk — compact, 1 kolom -->
+        <div class="sys-net" id="netRow">
+          <div class="sys-sec-hdr">Netwerk</div>
+          <div class="net-compact">
+            <div class="nc-line"><span class="nc-dot" style="background:var(--acc)"></span><span class="nc-key">LAN</span><span class="nc-v" id="netIp">–</span></div>
+            <div class="nc-line"><span class="nc-dot" style="background:var(--cyn)"></span><span class="nc-key">Extern</span><span class="nc-v" id="extIp">…</span></div>
+            <div class="nc-line nc-tx"><span class="nc-dot" style="background:transparent"></span><span class="nc-key" style="color:var(--acc)">↑ TX</span><span class="nc-v" id="netTx">–</span></div>
+            <div class="nc-line nc-rx"><span class="nc-dot" style="background:transparent"></span><span class="nc-key" style="color:var(--blu)">↓ RX</span><span class="nc-v" id="netRx">–</span></div>
+          </div>
+        </div>
+
+        <!-- Schijven -->
+        <div class="disk-sec">
+          <div class="sys-sec-hdr">Schijven</div>
+          <div id="diskCpt"><div style="font-family:var(--mono);font-size:9px;color:var(--t3)">laden…</div></div>
+        </div>
+
+        <!-- Temperaturen -->
+        <div class="disk-sec" id="tempSec" style="display:none">
+          <div class="sys-sec-hdr">Temperaturen</div>
+          <div id="tempCpt"></div>
+        </div>
+
+        <!-- Docker geheugen -->
+        <div class="disk-sec" id="dstatSec" style="display:none">
+          <div class="sys-sec-hdr">Docker geheugen</div>
+          <div id="dstatCpt"></div>
+        </div>
+
+      </div><!-- sys-scroll -->
     </div>
   </div>
 
@@ -505,7 +656,13 @@ header {
 
   <!-- RIGHT: Weer + Kalender + Agenda -->
   <div class="rc">
-    <div class="panel" style="flex-shrink:0">
+    <!-- Bookmarks (alleen zichtbaar als gevuld) -->
+    <div class="panel" id="bmPanel" style="flex-shrink:0;display:none">
+      <div class="ph"><div class="pt">🔖 Bookmarks</div><button class="pb" onclick="openS('notes')">✏</button></div>
+      <div class="bm-grid" id="bmGrid"></div>
+    </div>
+
+        <div class="panel" style="flex-shrink:0">
       <div class="ph"><div class="pt" id="wxTtl">🌤 Heerenveen</div></div>
       <div id="wxBody"><div class="wx-b" style="font-family:var(--mono);font-size:10px;color:var(--t3)">laden…</div></div>
     </div>
@@ -513,6 +670,15 @@ header {
       <div class="ph"><div class="pt">📅 Kalender</div></div>
       <div class="cal-b" id="calBody"></div>
     </div>
+    <!-- Uptime Kuma (alleen tonen als geconfigureerd) -->
+    <div class="panel" id="kumaPanel" style="flex-shrink:0;display:none">
+      <div class="ph">
+        <div class="pt"><span class="pd" style="background:var(--grn);box-shadow:0 0 5px var(--grn)"></span>Uptime Kuma</div>
+        <button class="pb" onclick="loadKuma()">↻</button>
+      </div>
+      <div id="kumaBody" style="padding:8px;display:flex;flex-wrap:wrap;gap:5px"></div>
+    </div>
+
     <div class="panel ag-panel">
       <div class="ph">
         <div class="pt">📋 Agenda</div>
@@ -534,6 +700,7 @@ header {
     <span id="sbApi" style="color:var(--acc)">● API OK</span>
     <span id="sbNet"></span>
     <span id="sbSave" style="color:var(--t4)"></span>
+    <span id="sbBackup" style="color:var(--t4)"></span>
   </div>
   <span style="color:var(--t4)">home//dash · <a href="https://github.com/huizebruin/homedash" target="_blank" style="color:var(--t3);text-decoration:none" title="GitHub">huizebruin</a> · <span id="sbHost" style="color:var(--acc)">–</span></span>
 </div>
@@ -554,6 +721,7 @@ header {
       <div class="tab"     id="t-agenda"    onclick="swTab('agenda')">📋 Agenda</div>
       <div class="tab"     id="t-calendars" onclick="swTab('calendars')">📆 Kalenders</div>
       <div class="tab"     id="t-thm"       onclick="swTab('thm')">🎨 Thema</div>
+      <div class="tab"     id="t-notes"     onclick="swTab('notes')">📝 Notities</div>
       <div class="tab"     id="t-over"      onclick="swTab('over')">ℹ Over</div>
     </div>
 
@@ -567,17 +735,40 @@ header {
       </div>
 
       <div class="sch">Locatie &amp; Weer</div>
-      <div class="frow">
-        <div class="field"><label>Breedtegraad</label><input type="number" id="cLat" step="0.01" placeholder="52.96"></div>
-        <div class="field"><label>Lengtegraad</label><input type="number" id="cLon" step="0.01" placeholder="5.92"></div>
+      <div class="field">
+        <label>Zoek stad / plaats</label>
+        <div style="display:flex;gap:7px;align-items:center">
+          <input type="text" id="cLocSearch" placeholder="bv. Heerenveen, Amsterdam..." autocomplete="off" oninput="locSearchDebounce()" onfocus="showLocResults()">
+          <button type="button" onclick="locSearchNow()" class="add-b" style="white-space:nowrap;flex-shrink:0">🔍 Zoek</button>
+        </div>
+        <div id="locResults" style="display:none;background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r);margin-top:5px;max-height:180px;overflow-y:auto;z-index:50"></div>
       </div>
-      <div class="field"><label>Plaatsnaam</label><input type="text" id="cCity" placeholder="Heerenveen"></div>
+      <div class="frow" style="margin-top:4px">
+        <div class="field"><label>Breedtegraad</label><input type="number" id="cLat" step="0.0001" placeholder="52.96" onblur="reverseGeocode()"></div>
+        <div class="field"><label>Lengtegraad</label><input type="number" id="cLon" step="0.0001" placeholder="5.92" onblur="reverseGeocode()"></div>
+      </div>
+      <div class="field"><label>Plaatsnaam (weergave)</label><input type="text" id="cCity" placeholder="Heerenveen"></div>
+      <div class="field-note">💡 Typ een plaatsnaam en klik op een resultaat — coördinaten worden automatisch ingevuld</div>
 
       <div class="sch">API verbinding</div>
       <div class="field">
         <label>HomeDash API URL</label>
         <input type="text" id="cApi" placeholder="Leeg = zelfde server (aanbevolen)">
-        <div class="field-note">Op andere PC's: http://nas-ip:3001 — dan laad je dezelfde config van de server</div>
+        <div class="field-note">Op andere PC's: http://nas-ip:3002 — dan laad je dezelfde config van de server</div>
+      </div>
+
+      <div class="sch">Uptime Kuma</div>
+      <div class="field">
+        <label>Uptime Kuma URL</label>
+        <input type="text" id="cKumaUrl" placeholder="http://192.168.1.x:3001 (leeg = uitgeschakeld)">
+        <div class="field-note">Vul de basis-URL in van je Uptime Kuma instantie. Statuspagina API wordt automatisch gebruikt.</div>
+      </div>
+
+      <div class="sch">Last backup pad(en)</div>
+      <div class="field">
+        <label>Backup bestanden / mappen (1 per regel)</label>
+        <textarea id="cBackupPaths" rows="3" placeholder="/mnt/backup/latest.tar.gz&#10;/data/backup/"></textarea>
+        <div class="field-note">Bestandspad op de server. Toont de datum van de nieuwste wijziging.</div>
       </div>
 
       <div class="sch">Ververs intervallen</div>
@@ -693,6 +884,28 @@ header {
       </div>
     </div>
 
+
+    <!-- NOTITIES -->
+    <div class="tp" id="p-notes">
+      <div class="sch">Persoonlijke notities</div>
+      <div class="field-note" style="margin-bottom:10px">Wordt lokaal opgeslagen én in je config. Handig voor wachtwoorden, tijdelijke aantekeningen, todo's.</div>
+      <textarea class="notes-area" id="notesText" placeholder="Schrijf hier je notities…&#10;&#10;Bijv:&#10;- SSH: ssh user@192.168.1.x&#10;- Printers IP: 192.168.1.x&#10;- TODO: firmware updaten"></textarea>
+      <div class="note-saved" id="noteSaved"></div>
+      <button class="add-b" onclick="saveNotes()" style="width:100%;padding:7px;margin-top:8px;text-align:center">💾 Notities opslaan</button>
+
+      <div class="sch">Sneltoetsen</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:12px;color:var(--t2)">
+        <span class="kbd">/</span><span>Focus zoekbalk</span>
+        <span class="kbd">Esc</span><span>Sluit modal / zoekbalk</span>
+        <span class="kbd">Enter</span><span>Zoeken uitvoeren</span>
+      </div>
+
+      <div class="sch">Bookmarks</div>
+      <div class="field-note" style="margin-bottom:10px">Snel-links die altijd zichtbaar zijn bovenaan het dashboard (apart van diensten).</div>
+      <div id="bmRows"></div>
+      <button class="add-b" onclick="addBmRow()" style="width:100%;padding:7px;margin-top:4px;text-align:center">+ Bookmark toevoegen</button>
+    </div>
+
     <!-- OVER -->
     <div class="tp" id="p-over">
       <div class="about-box">
@@ -734,7 +947,7 @@ header {
 // ════════════════════════════════════════════════════════
 // CONFIG — opgeslagen server-side in /data/config.json
 // ════════════════════════════════════════════════════════
-const VER = '8.0.0';
+const VER = '8.2.0';
 const DEF = {
   displayName: '',
   lat: 52.96, lon: 5.92, city: 'Heerenveen',
@@ -744,6 +957,10 @@ const DEF = {
   events: [],
   services: [],
   calFeeds: [],
+  notes: '',
+  bookmarks: [],
+  uptimeKumaUrl: '',
+  backupPaths: [],
 };
 let C = {...DEF};
 
@@ -791,6 +1008,17 @@ function applyTheme(t) {
   const h = new Date().getHours();
   const v = t === 'auto' ? (h >= 20 || h < 7 ? 'dark' : 'light') : t;
   document.documentElement.setAttribute('data-theme', v);
+  updateLogoTheme(v);
+}
+function updateLogoTheme(v) {
+  const isDark = v === 'dark';
+  const textCol  = isDark ? '#dce6f8' : '#0f1b30';
+  const accentCol = isDark ? '#00e5a0' : '#009966';
+  const el = id => document.getElementById(id);
+  if (el('logoHome'))  el('logoHome').setAttribute('fill', textCol);
+  if (el('logoDash'))  el('logoDash').setAttribute('fill', textCol);
+  if (el('logoSlash')) el('logoSlash').setAttribute('fill', accentCol);
+  if (el('logoPulse')) el('logoPulse').setAttribute('stroke', accentCol);
 }
 applyTheme('dark');
 setInterval(() => { if (C.theme === 'auto') applyTheme('auto'); }, 60000);
@@ -1056,6 +1284,21 @@ async function loadSys() {
     S('sbNet', lan?.ip ? `LAN: ${lan.ip}` : '');
     S('sbUpd', 'Bijgewerkt: ' + new Date().toLocaleTimeString('nl-NL'));
     const ae = document.getElementById('sbApi'); ae.textContent='● API OK'; ae.style.color='var(--acc)';
+    // Temperaturen
+    if ((d.temperatures||[]).length) {
+      const sec=document.getElementById('tempSec'); if(sec)sec.style.display='';
+      const el=document.getElementById('tempCpt'); if(el) el.innerHTML=d.temperatures.map(t=>{
+        const col=t.temp>80?'var(--red)':t.temp>65?'var(--orn)':'var(--acc)';
+        return `<div class="temp-row"><span class="temp-lbl">${esc(t.type)}</span><span class="temp-val" style="color:${col}">${t.temp}°C</span></div>`;
+      }).join('');
+    }
+    // Backup tijd
+    if (d.lastBackup) {
+      const age = Math.round((Date.now()-new Date(d.lastBackup.timestamp).getTime())/3600000);
+      const col = age>48?'var(--red)':age>24?'var(--orn)':'var(--t3)';
+      S('sbBackup', `backup: ${age}u geleden`);
+      const el=document.getElementById('sbBackup'); if(el) el.style.color=col;
+    }
   } catch(e) {
     const ae = document.getElementById('sbApi'); ae.textContent='⚠ API fout'; ae.style.color='var(--red)';
   }
@@ -1074,17 +1317,10 @@ function buildNetRow(nets) {
   const ifaces = nets.filter(n => !skip.some(s => n.name.startsWith(s)) && !n.name.startsWith('br-') && !n.name.startsWith('veth')).slice(0,2);
   if (!ifaces.length) { fetchExt(); return; }
   const a = ifaces[0];
-  document.getElementById('netRow').innerHTML = `
-    <div class="net-card">
-      <div class="net-name"><span class="net-nm" style="background:var(--acc)"></span>${esc(a.name)}</div>
-      <div class="net-stat"><span class="arr up">↑</span><span class="net-lbl">TX</span><span class="net-v">${fmtB(a.tx_bytes)}</span></div>
-      <div class="net-stat"><span class="arr dn">↓</span><span class="net-lbl">RX</span><span class="net-v">${fmtB(a.rx_bytes)}</span></div>
-      <div class="net-ip">${esc(a.ip||'–')}</div>
-    </div>
-    <div class="net-card">
-      <div class="net-name"><span class="net-nm" style="background:var(--cyn)"></span>Extern IP</div>
-      <div class="net-stat"><span class="net-v" id="extIp">${_extIp||'…'}</span></div>
-    </div>`;
+  S('netIp', a.ip||'–');
+  S('netTx', fmtB(a.tx_bytes));
+  S('netRx', fmtB(a.rx_bytes));
+  S('sbNet', a.ip ? `LAN: ${a.ip}` : '');
   if (!_extIp) fetchExt();
 }
 let _extIp = '';
@@ -1111,7 +1347,9 @@ async function loadCtrs() {
     const ct = await r.json();
     const run = ct.filter(c => c.state==='running').length;
     S('ctrBadge', `${run}/${ct.length} actief`);
+    S('hCtrs', `${run}/${ct.length}`);
     buildCtrs(ct);
+    loadDockerStats();
   } catch(e) {
     document.getElementById('ctrGrid').innerHTML = `<div style="padding:16px;font-family:var(--mono);font-size:11px;color:var(--red);grid-column:1/-1">⚠ Containers niet beschikbaar</div>`;
   }
@@ -1130,11 +1368,28 @@ function buildCtrs(ct) {
       const m2=p.match(/^(\d+)\/(tcp|udp)/);if(m2)return `<span class="pp">${m2[1]}</span>`;
       return '';
     }).filter(Boolean).join('');
-    return `<div class="cc ${scls}"><div class="cc-hd"><span class="cc-nm">${esc(c.name||'–')}</span><span class="cbdg ${scls}">${slbl}</span></div><div class="cc-img">${esc(img)}</div><div class="cc-st">${esc(st)}</div><div class="cc-ports">${ports||'<span class="no-p">geen poorten</span>'}</div></div>`;
+    const actions = run
+      ? `<button class="cc-btn stop" onclick="ctrAction(event,'${esc(c.name)}','stop')" title="Stop">■</button>
+         <button class="cc-btn" onclick="ctrAction(event,'${esc(c.name)}','restart')" title="Herstart">↻</button>`
+      : `<button class="cc-btn start" onclick="ctrAction(event,'${esc(c.name)}','start')" title="Start">▶</button>`;
+    return `<div class="cc ${scls}"><div class="cc-actions">${actions}</div><div class="cc-hd"><span class="cc-nm">${esc(c.name||'–')}</span><span class="cbdg ${scls}">${slbl}</span></div><div class="cc-img">${esc(img)}</div><div class="cc-st">${esc(st)}</div><div class="cc-ports">${ports||'<span class="no-p">geen poorten</span>'}</div></div>`;
   }).join('');
 }
 
 // ════════════════════════════════════════════════════════
+// Container acties (restart/stop/start)
+async function ctrAction(e, name, action) {
+  e.preventDefault(); e.stopPropagation();
+  const labels = {restart:'Herstart',stop:'Stop',start:'Start'};
+  toast(`⏳ ${labels[action]||action}: ${name}…`);
+  try {
+    const r = await fetch(aU(`/api/container/${encodeURIComponent(name)}/${action}`), {method:'POST'});
+    const d = await r.json();
+    if (d.ok) { toast(`✓ ${labels[action]||action}: ${name}`); setTimeout(loadCtrs, 1500); }
+    else toast(`⚠ Fout: ${d.error||'onbekend'}`);
+  } catch(err) { toast(`⚠ ${err.message}`); }
+}
+
 // DIENSTEN + PING
 // ════════════════════════════════════════════════════════
 let _pingEnabled = true, _pingTimer = null, _pingResults = {};
@@ -1251,6 +1506,7 @@ function swTab(t) {
   document.querySelectorAll('.tp').forEach(e=>e.classList.toggle('on',e.id==='p-'+t));
   if(t==='diensten') buildIconPicker();
   if(t==='calendars') buildCalFeedRows();
+  if(t==='notes') { loadNotes(); buildBmRows(); }
   if(t==='over') loadHealthInfo();
 }
 
@@ -1266,6 +1522,7 @@ async function loadHealthInfo() {
 
 function openS(tab) {
   document.getElementById('cDisplayName').value = C.displayName||'';
+  const locInp=document.getElementById('cLocSearch');if(locInp)locInp.value=C.city||'';
   document.getElementById('cLat').value = C.lat;
   document.getElementById('cLon').value = C.lon;
   document.getElementById('cCity').value = C.city;
@@ -1274,6 +1531,8 @@ function openS(tab) {
   document.getElementById('cCtrI').value = C.ctrI||30;
   document.getElementById('cSysI').value = C.sysI||10;
   document.getElementById('cPingI').value = C.pingI||60;
+  const kumaEl=document.getElementById('cKumaUrl');if(kumaEl)kumaEl.value=C.uptimeKumaUrl||'';
+  const bpEl=document.getElementById('cBackupPaths');if(bpEl)bpEl.value=(C.backupPaths||[]).join('\n');
   document.querySelectorAll('.tho').forEach(e=>e.classList.toggle('on',e.dataset.t===C.theme));
   hlE(C.engine);
   renderEvList();
@@ -1296,11 +1555,18 @@ function saveS() {
   C.ctrI  = parseInt(document.getElementById('cCtrI').value)||30;
   C.sysI  = parseInt(document.getElementById('cSysI').value)||10;
   C.pingI = parseInt(document.getElementById('cPingI').value)||60;
+  const kumaUrlEl=document.getElementById('cKumaUrl');if(kumaUrlEl)C.uptimeKumaUrl=kumaUrlEl.value.trim().replace(/\/+$/,'');
+  const bpPathEl=document.getElementById('cBackupPaths');if(bpPathEl)C.backupPaths=bpPathEl.value.split('\n').map(s=>s.trim()).filter(Boolean);
   // Services
   C.services = Array.from(document.querySelectorAll('.svc-row')).map(r => {
     const ins=r.querySelectorAll('input');
     return {ico:ins[0].value.trim(),name:ins[1].value.trim(),ip:ins[2].value.trim(),port:ins[3].value.trim(),desc:ins[4].value.trim()};
   }).filter(s=>s.name&&s.ip);
+  // Notes
+  const notesEl=document.getElementById('notesText');
+  if(notesEl)C.notes=notesEl.value;
+  // Bookmarks
+  collectBmRows();
   // Calendar feeds
   C.calFeeds = Array.from(document.querySelectorAll('.cal-feed-row')).map(r => {
     const ins=r.querySelectorAll('input');
@@ -1309,7 +1575,7 @@ function saveS() {
   sC();
   applyTheme(C.theme);
   resetI();
-  loadSys(); loadCtrs(); loadWx(); renderAg(); renderSvc();
+  loadSys(); loadCtrs(); loadWx(); renderAg(); renderSvc(); renderBookmarks();
   setupPingTimer();
   fetchCalFeeds();
   closeS();
@@ -1337,12 +1603,222 @@ function addSvcRow() {
 }
 function delSvc(i) { C.services.splice(i,1); buildSvcRows(); }
 
+
+// ════════════════════════════════════════════════════════
+// LOCATIE ZOEKEN (Open-Meteo Geocoding API)
+// ════════════════════════════════════════════════════════
+let _locTimer = null;
+function locSearchDebounce() {
+  clearTimeout(_locTimer);
+  _locTimer = setTimeout(locSearchNow, 500);
+}
+
+async function locSearchNow() {
+  const q = document.getElementById('cLocSearch')?.value?.trim();
+  if (!q || q.length < 2) { hideLocResults(); return; }
+  const el = document.getElementById('locResults');
+  if (!el) return;
+  el.style.display = 'block';
+  el.innerHTML = '<div style="padding:8px 12px;font-family:var(--mono);font-size:11px;color:var(--t3)">Zoeken…</div>';
+  try {
+    const r = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=8&language=nl&format=json`);
+    const d = await r.json();
+    const results = d.results || [];
+    if (!results.length) {
+      el.innerHTML = '<div style="padding:8px 12px;font-family:var(--mono);font-size:11px;color:var(--t3)">Geen resultaten gevonden</div>';
+      return;
+    }
+    el.innerHTML = results.map(r => `
+      <div class="loc-res-item" onclick="pickLocation(${r.latitude},${r.longitude},'${esc(r.name)}','${esc(r.country||'')}')">
+        <div>
+          <div class="loc-res-name">${esc(r.name)}</div>
+          <div class="loc-res-sub">${esc([r.admin1,r.country].filter(Boolean).join(', '))}</div>
+        </div>
+        <div class="loc-res-coords">${r.latitude.toFixed(3)}, ${r.longitude.toFixed(3)}</div>
+      </div>`).join('');
+  } catch(e) {
+    el.innerHTML = '<div style="padding:8px 12px;font-family:var(--mono);font-size:11px;color:var(--red)">Fout bij zoeken</div>';
+  }
+}
+
+function pickLocation(lat, lon, name, country) {
+  const latEl = document.getElementById('cLat');
+  const lonEl = document.getElementById('cLon');
+  const cityEl = document.getElementById('cCity');
+  const searchEl = document.getElementById('cLocSearch');
+  if (latEl) latEl.value = lat.toFixed(4);
+  if (lonEl) lonEl.value = lon.toFixed(4);
+  if (cityEl) cityEl.value = name; // altijd overschrijven
+  if (searchEl) searchEl.value = name + (country ? ', '+country : '');
+  hideLocResults();
+  toast(`📍 ${name} geselecteerd`);
+}
+
+// Reverse geocode: als je lat/lon plakt → zoek stadsnaam op
+async function reverseGeocode() {
+  const lat = parseFloat(document.getElementById('cLat')?.value);
+  const lon = parseFloat(document.getElementById('cLon')?.value);
+  if (isNaN(lat) || isNaN(lon)) return;
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=nl`, {headers:{'Accept-Language':'nl'}});
+    const d = await r.json();
+    const city = d.address?.city || d.address?.town || d.address?.village || d.address?.municipality || '';
+    if (city) {
+      const el = document.getElementById('cCity');
+      if (el) { el.value = city; toast(`📍 Locatie gevonden: ${city}`); }
+    }
+  } catch(e) {}
+}
+
+function hideLocResults() {
+  const el = document.getElementById('locResults');
+  if (el) el.style.display = 'none';
+}
+function showLocResults() {
+  const q = document.getElementById('cLocSearch')?.value?.trim();
+  if (q && q.length >= 2) {
+    const el = document.getElementById('locResults');
+    if (el && el.innerHTML && !el.innerHTML.includes('Zoeken')) el.style.display = 'block';
+  }
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('#cLocSearch') && !e.target.closest('#locResults') && !e.target.closest('[onclick*="locSearch"]'))
+    hideLocResults();
+});
+
+
+// ════════════════════════════════════════════════════════
+// NOTITIES
+// ════════════════════════════════════════════════════════
+function loadNotes() {
+  const el = document.getElementById('notesText');
+  if (el) el.value = C.notes || '';
+}
+function saveNotes() {
+  const el = document.getElementById('notesText');
+  if (!el) return;
+  C.notes = el.value;
+  sC();
+  const sv = document.getElementById('noteSaved');
+  if (sv) { sv.textContent = '✓ Opgeslagen'; setTimeout(() => sv.textContent='', 3000); }
+}
+
+// ════════════════════════════════════════════════════════
+// BOOKMARKS
+// ════════════════════════════════════════════════════════
+function renderBookmarks() {
+  const bms = C.bookmarks || [];
+  const panel = document.getElementById('bmPanel');
+  const grid  = document.getElementById('bmGrid');
+  if (!panel || !grid) return;
+  if (!bms.length) { panel.style.display = 'none'; return; }
+  panel.style.display = '';
+  grid.innerHTML = bms.filter(b=>b.url).map(b => `
+    <a class="bm-item" href="${esc(b.url)}" target="_blank" rel="noopener">
+      <span class="bm-ico">${esc(b.ico||'🔖')}</span>
+      <span>${esc(b.name||b.url)}</span>
+    </a>`).join('');
+}
+function buildBmRows() {
+  const wrap = document.getElementById('bmRows'); if (!wrap) return;
+  wrap.innerHTML = (C.bookmarks||[]).map((b,i) => `
+    <div class="bm-row">
+      <input type="text" value="${esc(b.ico||'')}" placeholder="🔖">
+      <input type="text" value="${esc(b.name||'')}" placeholder="Naam">
+      <input type="text" value="${esc(b.url||'')}" placeholder="https://...">
+      <button class="del-b" onclick="delBm(${i})">✕</button>
+    </div>`).join('');
+}
+function addBmRow() {
+  if (!C.bookmarks) C.bookmarks = [];
+  C.bookmarks.push({ico:'🔖', name:'', url:''});
+  buildBmRows();
+  setTimeout(()=>{const rows=document.querySelectorAll('.bm-row');if(rows.length)rows[rows.length-1].querySelectorAll('input')[1]?.focus();},50);
+}
+function delBm(i) { C.bookmarks.splice(i,1); buildBmRows(); }
+function collectBmRows() {
+  C.bookmarks = Array.from(document.querySelectorAll('.bm-row')).map(r=>{
+    const ins=r.querySelectorAll('input');
+    return{ico:ins[0].value.trim(),name:ins[1].value.trim(),url:ins[2].value.trim()};
+  }).filter(b=>b.url);
+}
+
+
+// ════════════════════════════════════════════════════════
+// DOCKER STATS
+// ════════════════════════════════════════════════════════
+async function loadDockerStats() {
+  try {
+    const r = await fetch(aU('/api/docker-stats')); if(!r.ok)return;
+    const stats = await r.json();
+    if (!stats.length) return;
+    const sec = document.getElementById('dstatSec'); if(sec) sec.style.display='';
+    const el  = document.getElementById('dstatCpt'); if(!el) return;
+    // Sort by memory descending
+    const sorted = [...stats].sort((a,b) => parseMem(b.mem) - parseMem(a.mem)).slice(0,8);
+    el.innerHTML = sorted.map(s => {
+      const mb = parseMem(s.mem);
+      const col = mb>1024?'var(--red)':mb>512?'var(--orn)':'var(--t2)';
+      return `<div class="temp-row">
+        <span class="temp-lbl">${esc(s.name)}</span>
+        <span style="font-family:var(--mono);font-size:10px;font-weight:600;color:${col}">${esc(s.mem.split('/')[0].trim())}</span>
+      </div>`;
+    }).join('');
+  } catch(e) {}
+}
+function parseMem(str) {
+  if (!str) return 0;
+  const m = str.match(/([\d.]+)\s*(MiB|GiB|MB|GB|KiB|KB)/i);
+  if (!m) return 0;
+  const v = parseFloat(m[1]);
+  const u = m[2].toLowerCase();
+  if (u.startsWith('g')) return v * 1024;
+  if (u.startsWith('k')) return v / 1024;
+  return v;
+}
+
+// ════════════════════════════════════════════════════════
+// UPTIME KUMA
+// ════════════════════════════════════════════════════════
+async function loadKuma() {
+  const url = C.uptimeKumaUrl;
+  if (!url) return;
+  const panel = document.getElementById('kumaPanel');
+  if (panel) panel.style.display = '';
+  const el = document.getElementById('kumaBody'); if(!el) return;
+  el.innerHTML = '<div style="font-family:var(--mono);font-size:10px;color:var(--t3);padding:4px">laden…</div>';
+  try {
+    // Uptime Kuma public status page API
+    const apiUrl = url.replace(/\/+$/, '') + '/api/status-page/heartbeat/default';
+    const r = await fetch(apiUrl, { signal: AbortSignal.timeout(8000) });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    const heartbeats = d.heartbeatList || {};
+    if (!Object.keys(heartbeats).length) {
+      el.innerHTML = '<div style="font-family:var(--mono);font-size:10px;color:var(--t3);padding:4px">Geen monitors gevonden.<br>Controleer URL en zorg dat de statuspagina "default" heet.</div>';
+      return;
+    }
+    el.innerHTML = Object.entries(heartbeats).map(([name, beats]) => {
+      const last = beats[beats.length-1];
+      const up = last?.status === 1;
+      const ms = last?.ping ? last.ping + 'ms' : '';
+      return `<div class="kuma-chip">
+        <span class="kuma-dot ${up?'up':'down'}"></span>
+        <span>${esc(name)}</span>
+        ${ms ? `<span style="color:var(--t3);font-size:9px">${esc(ms)}</span>` : ''}
+      </div>`;
+    }).join('');
+  } catch(e) {
+    el.innerHTML = `<div style="font-family:var(--mono);font-size:10px;color:var(--red);padding:4px">⚠ Niet bereikbaar<br><span style="color:var(--t3)">${esc(e.message)}</span></div>`;
+  }
+}
+
 // ════════════════════════════════════════════════════════
 // HELPERS
 // ════════════════════════════════════════════════════════
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function S(id,v){const e=document.getElementById(id);if(e&&v!==null)e.textContent=v;}
-function bar(id,p,c){const e=document.getElementById(id);if(!e)return;e.style.width=Math.min(p,100)+'%';e.className='hbar '+c;}
+function bar(id,p,c){const e=document.getElementById(id);if(!e)return;e.style.width=Math.min(p,100)+'%';const base=e.className.includes('sm-fill')?'sm-fill':'hbar';e.className=base+' '+c;}
 function fmtB(b){if(!b||b<1024)return(b||0)+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';if(b<1073741824)return(b/1048576).toFixed(1)+' MB';return(b/1073741824).toFixed(2)+' GB';}
 let _tt;
 function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>e.classList.remove('show'),2800);}
@@ -1363,6 +1839,7 @@ function resetI() {
 (async () => {
   await lC();
   applyTheme(C.theme);
+  updateLogoTheme(C.theme === 'auto' ? (new Date().getHours() >= 20 || new Date().getHours() < 7 ? 'dark' : 'light') : C.theme);
   document.getElementById('ebtn').textContent = C.eico||'🔍';
   hlE(C.engine);
   const hn = C.displayName || '–';
@@ -1370,6 +1847,7 @@ function resetI() {
   renderSvc();
   renderAg();
   buildCal();
+  renderBookmarks();
   await Promise.allSettled([loadSys(), loadCtrs(), loadWx()]);
   resetI();
   setupPingTimer();
@@ -1380,6 +1858,10 @@ function resetI() {
   if ((C.calFeeds||[]).length) {
     fetchCalFeeds();
     setInterval(fetchCalFeeds, 1_800_000);
+  }
+  if (C.uptimeKumaUrl) {
+    loadKuma();
+    setInterval(loadKuma, 120_000);
   }
 })();
 </script>

@@ -25,7 +25,7 @@ services:
     container_name: homedash-api
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "3002:3002"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc:/host/proc:ro
