@@ -16,6 +16,8 @@
 - **Kalender + Agenda** — events, herhaling, Google Calendar koppelen
 - **Zoekbalk** — kies zoekmachine, zoekgeschiedenis
 
+ 
+![screenshot](image.png)
 ## Installatie
 
 ```bash
@@ -24,6 +26,10 @@ cd homedash
 docker compose up -d --build
 # open: http://server-ip:1000
 ```
+
+
+
+
 
 ## Update (data blijft bewaard)
 
