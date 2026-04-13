@@ -1,4 +1,4 @@
-# 🏠 home//dash
+![logo](logo.svg)
 
 **Browser startpagina voor je homelab** — één scherm met alles wat je nodig hebt.
 
